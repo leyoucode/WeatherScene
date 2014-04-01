@@ -66,6 +66,8 @@
 		0112C6D718EA6F4A00DF1C7B /* sun_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 0112C6D418EA6F4A00DF1C7B /* sun_large.png */; };
 		0112C6D818EA6F4A00DF1C7B /* sun_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 0112C6D518EA6F4A00DF1C7B /* sun_small.png */; };
 		0112C6D918EA6F4A00DF1C7B /* sunshine.png in Resources */ = {isa = PBXBuildFile; fileRef = 0112C6D618EA6F4A00DF1C7B /* sunshine.png */; };
+		0112C6E018EABA8700DF1C7B /* stars.ped in Resources */ = {isa = PBXBuildFile; fileRef = 0112C6DE18EABA8700DF1C7B /* stars.ped */; };
+		0112C6E418EABEBB00DF1C7B /* fog.ped in Resources */ = {isa = PBXBuildFile; fileRef = 0112C6E318EABEBB00DF1C7B /* fog.ped */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,6 +149,8 @@
 		0112C6D418EA6F4A00DF1C7B /* sun_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sun_large.png; sourceTree = "<group>"; };
 		0112C6D518EA6F4A00DF1C7B /* sun_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sun_small.png; sourceTree = "<group>"; };
 		0112C6D618EA6F4A00DF1C7B /* sunshine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sunshine.png; sourceTree = "<group>"; };
+		0112C6DE18EABA8700DF1C7B /* stars.ped */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stars.ped; sourceTree = "<group>"; };
+		0112C6E318EABEBB00DF1C7B /* fog.ped */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fog.ped; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -276,6 +280,8 @@
 		0112C67E18E9BC7C00DF1C7B /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				0112C6E318EABEBB00DF1C7B /* fog.ped */,
+				0112C6DE18EABA8700DF1C7B /* stars.ped */,
 				0112C67F18E9BC9F00DF1C7B /* rain_heavy.ped */,
 				0112C68018E9BC9F00DF1C7B /* rain_light.ped */,
 				0112C68118E9BC9F00DF1C7B /* snow_heavy.ped */,
@@ -406,6 +412,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0112C6A318E9BE5B00DF1C7B /* bg_na.jpg in Resources */,
+				0112C6E018EABA8700DF1C7B /* stars.ped in Resources */,
 				0112C6C818E9C61E00DF1C7B /* cloudy_cloud1.png in Resources */,
 				0112C6B318E9BE5B00DF1C7B /* blur_bg_rain.jpg in Resources */,
 				0112C6AD18E9BE5B00DF1C7B /* bg14_day_snow.jpg in Resources */,
@@ -413,6 +420,7 @@
 				0112C6D018E9C90100DF1C7B /* overcast_cloud2.png in Resources */,
 				0112C6B818E9BE5B00DF1C7B /* blur_bg1_cloudy_day.jpg in Resources */,
 				0112C6CB18E9C61E00DF1C7B /* cloudy_cloud4.png in Resources */,
+				0112C6E418EABEBB00DF1C7B /* fog.ped in Resources */,
 				0112C6AC18E9BE5B00DF1C7B /* bg1_cloudy_night.jpg in Resources */,
 				0112C6B718E9BE5B00DF1C7B /* blur_bg0_fine_night.jpg in Resources */,
 				0112C6A818E9BE5B00DF1C7B /* bg_thunder_storm.jpg in Resources */,

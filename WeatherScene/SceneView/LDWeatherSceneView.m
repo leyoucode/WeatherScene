@@ -62,7 +62,7 @@
    [self.backgroundImageView setImage:backgroundImage];
 }
 
-//下雨
+//////////////////////////////////////////////////////// 下雨 ///////////////////////////////////////////////////
 -(void) doSkyRainning
 {
     //清除当前效果
@@ -75,7 +75,7 @@
     currentWeatherEffect = WeatherEffectRain;
 }
 
-//下雪
+//////////////////////////////////////////////////////// 下雪 ///////////////////////////////////////////////////
 -(void) doSkySnowing
 {
     //清除当前效果
@@ -88,7 +88,7 @@
     currentWeatherEffect = WeatherEffectSnow;
 }
 
-//阴天
+//////////////////////////////////////////////////////// 阴天 ///////////////////////////////////////////////////
 -(void) doSkyOvertcasting
 {
     //清除当前效果
@@ -99,7 +99,7 @@
     currentWeatherEffect = WeatherEffectOvercast;
 }
 
-//多云
+//////////////////////////////////////////////////////// 多云 ///////////////////////////////////////////////////
 -(void) doSkyClouding
 {
     //清除当前效果
@@ -113,8 +113,6 @@
    UIImageView *cloud2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"overcast_cloud2.png"]];
      [cloud2 setFrame:CGRectMake(-297-208, 0, 297, 208)];
     [self addSubview:cloud2];
-    
-   
     
     [UIView animateWithDuration:30
                           delay:0.0f
@@ -146,6 +144,7 @@
     
 }
 
+//////////////////////////////////////////////////////// 晴天 ///////////////////////////////////////////////////
 -(void) doSkySunning
 {
     //清除当前效果
@@ -157,12 +156,18 @@
     [sunImageView setImage:[UIImage imageNamed:@"sun_small.png"]];
     [self addSubview:sunImageView];
     
+    [sunImageView.layer removeAllAnimations];
+    
     [self sunStartAlphaAnimation];
     
-    sunshine =  [[UIImageView alloc] initWithFrame:CGRectMake(130, 0, 200, 241)];
+    sunshine =  [[UIImageView alloc] initWithFrame:CGRectMake(140, 0, 200, 241)];
+    //[sunshine setCenter:CGPointMake(200, 180)];
     [sunshine setImage:[UIImage imageNamed:@"sunshine.png"] ];
     [self addSubview:sunshine];
     angle = 10;
+    
+        [sunshine.layer removeAllAnimations];
+    
     [self startAnimation];
     
     currentWeatherEffect = WeatherEffectSunny;
@@ -170,14 +175,14 @@
 
 -(void)sunStartAlphaAnimation
 {
-    [UIView animateWithDuration:2.0
+    [UIView animateWithDuration:3.0
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseIn
                      animations:^{
                          sunImageView.alpha = 0.8;
                      }
                      completion:^(BOOL finished){
-                         [UIView animateWithDuration:1.0
+                         [UIView animateWithDuration:3.0
                                                delay:0.0
                                              options:UIViewAnimationOptionCurveEaseOut animations:^{
                                                  sunImageView.alpha = 1.0;
@@ -186,6 +191,7 @@
                                                [self sunStartAlphaAnimation];
                                           }];
                      }];
+    
 }
 
 - (void)startAnimation
@@ -203,17 +209,16 @@
     
 }
 
-//-(void)setBackgroundImage:(UIImage*)backgroundImage
-//{
-//    [self setImage:backgroundImage];
-//}
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+//////////////////////////////////////////////////////// 雾霾 ///////////////////////////////////////////////////
+-(void) doSkyFogging
 {
-    // Drawing code
+    //清除当前效果
+    [self removeCurrentEffect];
+    //Set background image
+    [self setBackgroundImage:[UIImage imageNamed:@"bg_overcast.jpg"]];
+    effectView = [UIEffectDesignerView effectWithFile:@"fog.ped"];
+    [self addSubview:effectView];
+    
+    currentWeatherEffect = WeatherEffectFog;
 }
-*/
-
 @end

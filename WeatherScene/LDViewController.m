@@ -63,6 +63,11 @@
 }
 
 - (IBAction)doSunny:(id)sender {
-      [weatherSceneView doSkyRainning];
+      [weatherSceneView doSkySunning];
+}
+
+- (IBAction)doFog:(id)sender {
+    [weatherSceneView doSkyFogging];
+    
 }
 @end

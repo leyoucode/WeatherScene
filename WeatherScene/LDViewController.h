@@ -19,5 +19,6 @@
 - (IBAction)doOvercast:(id)sender;
 - (IBAction)doCloudy:(id)sender;
 - (IBAction)doSunny:(id)sender;
+- (IBAction)doFog:(id)sender;
 
 @end

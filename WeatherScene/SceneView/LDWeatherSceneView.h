@@ -8,16 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-//typedef enum{
-//
-//}WeatherEffect;
-
 typedef enum {
     WeatherEffectRain,                  //雨
     WeatherEffectSnow,                //雪
     WeatherEffectOvercast,         //阴天
     WeatherEffectCloudy,             //多云
-    WeatherEffectSunny              //晴天
+    WeatherEffectSunny,              //晴天
+    WeatherEffectFog                   //雾霾
 }WeatherEffect;
 
 
@@ -32,5 +29,7 @@ typedef enum {
 -(void) doSkyClouding;
 
 -(void) doSkySunning;
+
+-(void) doSkyFogging;
 
 @end
