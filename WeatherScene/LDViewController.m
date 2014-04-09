@@ -8,9 +8,9 @@
 
 #import "LDViewController.h"
 #import "UIEffectDesignerView.h"
-
-#import "LDRainSceneView.h"
 #import "LDWeatherSceneView.h"
+
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface LDViewController ()
 
@@ -48,6 +48,31 @@
 
 - (IBAction)doRain:(id)sender {
      [weatherSceneView doSkyRainning];
+//    if ([ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusNotDetermined) {
+//        
+//        ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc] init];
+//        
+//        [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+//            
+//            if (*stop) {
+//                //点击“好”回调方法:这里是重点
+//                NSLog(@"好");
+//                return;
+//                
+//            }
+//            *stop = TRUE;
+//            
+//        } failureBlock:^(NSError *error) {
+//            
+//            //点击“不允许”回调方法:这里是重点
+//            NSLog(@"不允许");
+//            [self dismissViewControllerAnimated:YES completion:nil];
+//            
+//        }];
+//    }else if ([ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusDenied)
+//    {
+//        NSLog(@"已经拒绝");
+//    }
 }
 
 - (IBAction)doSnow:(id)sender {
@@ -69,5 +94,9 @@
 - (IBAction)doFog:(id)sender {
     [weatherSceneView doSkyFogging];
     
+}
+
+- (IBAction)doWind:(id)sender {
+    [weatherSceneView doSkyWinding];
 }
 @end

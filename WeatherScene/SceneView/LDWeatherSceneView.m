@@ -20,9 +20,16 @@
 {
     UIEffectDesignerView* effectView;
     WeatherEffect currentWeatherEffect;
-    UIImageView *sunshine;
-    UIImageView *sunImageView;
-    double angle;
+    
+    UIImageView *sunshineImageView;//太阳光柱图片
+    UIImageView *sunImageView;//太阳图片
+    double sunshineAngle;//太阳光柱图片旋转角度
+    BOOL isSunshineRoating;//太阳光柱图片是否在旋转中
+    BOOL isSunEaseInOuting;//太阳是否正在淡入淡出动画
+    
+    UIImageView *windImageView;//风车叶子图片
+    double windAngle;//风车叶子图片旋转角度
+    BOOL isWindRoating;//风车叶子图片是否在旋转中
 }
 
 @synthesize backgroundImageView;
@@ -39,6 +46,9 @@
 
 -(void) removeCurrentEffect
 {
+    isSunshineRoating = NO;
+    isSunEaseInOuting = NO;
+    isWindRoating = NO;
     
     NSArray *subViews =  [self subviews];
     for (UIView *view in subViews) {
@@ -68,12 +78,62 @@
     //清除当前效果
     [self removeCurrentEffect];
     //Set background image
-    [self setBackgroundImage:[UIImage imageNamed:@"bg_rain.jpg"]];
+    [self setBackgroundImage:[UIImage imageNamed:@"bg_thunder_storm.jpg"]];
     effectView = [UIEffectDesignerView effectWithFile:@"rain_light.ped"];
     [self addSubview:effectView];
     
+    UIEffectDesignerView *lightningEffectView1 = [UIEffectDesignerView effectWithFile:@"lightning.ped"];
+    UIEffectDesignerView *lightningEffectView2 = [UIEffectDesignerView effectWithFile:@"lightning2.ped"];
+    
+    [self addSubview:lightningEffectView1];
+     [self addSubview:lightningEffectView2];
+    
+    
+    UIImageView *cloud1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"overcast_cloud1.png"]];
+    [cloud1 setFrame:CGRectMake(0, 0, 297, 208)];
+    [self addSubview:cloud1];
+    
+    UIImageView *cloud2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"overcast_cloud2.png"]];
+    [cloud2 setFrame:CGRectMake(-297-208, 0, 297, 208)];
+    [self addSubview:cloud2];
+    
+    [UIView animateWithDuration:30
+                          delay:0.0f
+                        options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveLinear | UIViewAnimationOptionAllowUserInteraction
+                     animations:^{
+                         cloud1.frame = CGRectMake(480, 0, 297, 208);
+                     }
+     
+                     completion:^(BOOL finished) {
+                         //[unusedViews addObject:userItem];
+                         // [cloud removeFromSuperview];
+                         //[self moveClouds];
+                     }
+     ];
+    
+    [UIView animateWithDuration:40
+                          delay:0.0f
+                        options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveLinear | UIViewAnimationOptionAllowUserInteraction
+                     animations:^{
+                         cloud2.frame = CGRectMake(480, 0, 297, 208);
+                     }
+     
+                     completion:^(BOOL finished) {
+                         //[unusedViews addObject:userItem];
+                         // [cloud removeFromSuperview];
+                         //[self moveClouds];
+                     }
+     ];
+
+    
     currentWeatherEffect = WeatherEffectRain;
 }
+
+
+
+
+
+
 
 //////////////////////////////////////////////////////// 下雪 ///////////////////////////////////////////////////
 -(void) doSkySnowing
@@ -95,6 +155,42 @@
     [self removeCurrentEffect];
     //Set background image
     [self setBackgroundImage:[UIImage imageNamed:@"bg_overcast.jpg"]];
+    
+    UIImageView *cloud1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"overcast_cloud1.png"]];
+    [cloud1 setFrame:CGRectMake(0, 0, 297, 208)];
+    [self addSubview:cloud1];
+    
+    UIImageView *cloud2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"overcast_cloud2.png"]];
+    [cloud2 setFrame:CGRectMake(-297-208, 0, 297, 208)];
+    [self addSubview:cloud2];
+    
+    [UIView animateWithDuration:30
+                          delay:0.0f
+                        options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveLinear | UIViewAnimationOptionAllowUserInteraction
+                     animations:^{
+                         cloud1.frame = CGRectMake(480, 0, 297, 208);
+                     }
+     
+                     completion:^(BOOL finished) {
+                         //[unusedViews addObject:userItem];
+                         // [cloud removeFromSuperview];
+                         //[self moveClouds];
+                     }
+     ];
+    
+    [UIView animateWithDuration:40
+                          delay:0.0f
+                        options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveLinear | UIViewAnimationOptionAllowUserInteraction
+                     animations:^{
+                         cloud2.frame = CGRectMake(480, 0, 297, 208);
+                     }
+     
+                     completion:^(BOOL finished) {
+                         //[unusedViews addObject:userItem];
+                         // [cloud removeFromSuperview];
+                         //[self moveClouds];
+                     }
+     ];
     
     currentWeatherEffect = WeatherEffectOvercast;
 }
@@ -156,24 +252,23 @@
     [sunImageView setImage:[UIImage imageNamed:@"sun_small.png"]];
     [self addSubview:sunImageView];
     
-    [sunImageView.layer removeAllAnimations];
+    isSunEaseInOuting = YES;
     
-    [self sunStartAlphaAnimation];
+    [self startSunEaseInOutAnimation];
     
-    sunshine =  [[UIImageView alloc] initWithFrame:CGRectMake(140, 0, 200, 241)];
+    sunshineImageView =  [[UIImageView alloc] initWithFrame:CGRectMake(140, 0, 200, 241)];
     //[sunshine setCenter:CGPointMake(200, 180)];
-    [sunshine setImage:[UIImage imageNamed:@"sunshine.png"] ];
-    [self addSubview:sunshine];
-    angle = 10;
-    
-        [sunshine.layer removeAllAnimations];
-    
-    [self startAnimation];
+    [sunshineImageView setImage:[UIImage imageNamed:@"sunshine.png"] ];
+    [self addSubview:sunshineImageView];
+    sunshineAngle = 1;
+    isSunshineRoating = YES;
+    [self startSunshineRotationAnimation];
     
     currentWeatherEffect = WeatherEffectSunny;
 }
 
--(void)sunStartAlphaAnimation
+//太阳淡入淡出效果
+-(void)startSunEaseInOutAnimation
 {
     [UIView animateWithDuration:3.0
                           delay:0.0
@@ -188,23 +283,28 @@
                                                  sunImageView.alpha = 1.0;
                                              }
                                           completion:^(BOOL finished) {
-                                               [self sunStartAlphaAnimation];
+                                              if (isSunEaseInOuting) {
+                                                   [self startSunEaseInOutAnimation];
+                                              }
                                           }];
                      }];
     
 }
 
-- (void)startAnimation
+//太阳光柱旋转动画
+- (void)startSunshineRotationAnimation
 {
     
     
-    CGAffineTransform endAngle = CGAffineTransformMakeRotation(angle * (M_PI / 180.0f));
+    CGAffineTransform endAngle = CGAffineTransformMakeRotation(sunshineAngle * (M_PI / 180.0f));
     
     [UIView animateWithDuration:0.01 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-        sunshine.transform = endAngle;
+        sunshineImageView.transform = endAngle;
     } completion:^(BOOL finished) {
-        angle += 0.02;
-        [self startAnimation];
+        if (isSunshineRoating) {
+            sunshineAngle += 0.02;
+            [self startSunshineRotationAnimation];
+        }
     }];
     
 }
@@ -220,5 +320,37 @@
     [self addSubview:effectView];
     
     currentWeatherEffect = WeatherEffectFog;
+}
+
+//////////////////////////////////////////////////////// 风 ///////////////////////////////////////////////////
+-(void) doSkyWinding
+{
+    //清除当前效果
+    [self removeCurrentEffect];
+    //Set background image
+    [self setBackgroundImage:[UIImage imageNamed:@"bg_na.jpg"]];
+    
+    windImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 120, 200,200)];
+    [windImageView setImage:[UIImage imageNamed:@"na_windmill.png"]];
+    [self addSubview:windImageView];
+    
+    windAngle = 1;
+    isWindRoating = YES;
+    [self startWindRotationAnimation];
+}
+
+//风车叶子旋转动画
+- (void)startWindRotationAnimation
+{
+    CGAffineTransform endAngle = CGAffineTransformMakeRotation(windAngle * (M_PI / 180.0f));
+    [UIView animateWithDuration:0.01 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+        windImageView.transform = endAngle;
+    } completion:^(BOOL finished) {
+        if (isWindRoating) {
+             windAngle += 1;
+             [self startWindRotationAnimation];
+        }
+    }];
+    
 }
 @end

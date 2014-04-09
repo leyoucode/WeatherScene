@@ -20,5 +20,6 @@
 - (IBAction)doCloudy:(id)sender;
 - (IBAction)doSunny:(id)sender;
 - (IBAction)doFog:(id)sender;
+- (IBAction)doWind:(id)sender;
 
 @end

@@ -32,4 +32,6 @@ typedef enum {
 
 -(void) doSkyFogging;
 
+-(void) doSkyWinding;
+
 @end
